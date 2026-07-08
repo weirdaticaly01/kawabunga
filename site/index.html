@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Login Page</title>
+
+    <style>
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        body {
+            background-color: #acb7c9;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .text {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(59, 59, 59);
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-bottom: 5px;
+        }
+        p {
+            font-size: 1rem;
+            margin: 5px 20px;
+        }
+        h5 {
+            color: #3f3f3f;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        #error-message {
+            display: none;
+            color: red;
+            margin-bottom: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .beep {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #f3f3f3;
+            border-radius: 10px;
+            width: 90%;          
+            max-width: 380px;    
+            padding: 2rem;      
+            box-sizing: border-box;
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 60px -10px, rgba(0, 0, 0, 0.22) 0px 18px 36px -18px;
+            margin-bottom: 25px;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            border: #a5a5a5 solid 2px;
+            color: #3f3f3f;
+            border-radius: 5px;
+            width: 100%;
+            font-size: larger;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border: #494949 solid 2px;
+        }
+
+        /* Container that wraps the button, loader, and status text */
+        .cont {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;             
+            width: 90%;
+            max-width: 380px;
+            box-sizing: border-box;
+        }
+        
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #d8d9f7;
+            text-align: center;
+            border: #696bdf solid 2px;
+            background: #696bdf;
+            border-radius: 10px;
+            text-decoration: none;
+            width: 80%;         
+            box-sizing: border-box;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #696bdf; 
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #loader {
+            display: none; 
+        }
+        
+        .tt {
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(59, 59, 59);
+            font-size: larger;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text">
+        <h1>HELLO PERSON!</h1>
+        <p>PLEASE ENTER YOUR USERNAME AND PASSWORD TO CONTINUE</p>
+        <h5>this ain't a real site dw (no data will be stored)</h5>
+    </div>
+
+    <p id="error-message">Please enter both of your information first.</p>
+
+    <div class="beep">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+    </div>
+
+    <div class="cont">
+        <a href="rick_roll.mp4" id="confirm-btn">confirm</a>
+        <div id="loader" class="spinner"></div>
+        <div id="loading-text" class="tt"></div>
+    </div>
+
+    <script>
+        document.getElementById('confirm-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Stop the link from acting immediately
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('error-message');
+            const loader = document.getElementById('loader');
+            const loadingText = document.getElementById('loading-text');
+            const link = document.getElementById('confirm-btn');
+
+            if (username === "" || password === "") {
+                errorMsg.style.display = "block"; // Show error if fields are empty
+            } else {
+                errorMsg.style.display = "none"; // Hide error if resolved
+                
+                // 1. Hide/clear the confirm button text
+                link.innerText = ""; 
+                link.style.visibility = "hidden"; // Hides the button frame completely so the spinner takes over gracefully
+            
+                // 2. Show the loader right underneath
+                loader.style.display = "block"; 
+    
+                // 3. Set text to "loser." right before redirecting (at 5.25 seconds)
+                setTimeout(() => {
+                    loadingText.innerText = "loser.";
+                }, 5250);
+            
+                // 4. Wait 6.3 seconds total, then head over to the video link
+                setTimeout(function() {
+                    window.location.href = link.href;
+                }, 6300);
+            } 
+        });
+    </script>
+
+</body>
+</html>
